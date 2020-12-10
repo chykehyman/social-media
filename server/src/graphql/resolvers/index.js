@@ -3,7 +3,10 @@ import usersResolvers from './users';
 
 export default {
   Query: {
-    ...postsResolvers,
-    ...usersResolvers,
+    ...postsResolvers.Query,
+    ...usersResolvers.Query,
+  },
+  Mutation: {
+    ...usersResolvers.Mutation,
   },
 };

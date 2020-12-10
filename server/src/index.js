@@ -2,8 +2,8 @@ import { ApolloServer } from 'apollo-server';
 import dotEnv from 'dotenv';
 import mongoose from 'mongoose';
 
-import typeDefs from './types';
-import resolvers from './src/graphql/resolvers';
+import typeDefs from './graphql/types';
+import resolvers from './graphql/resolvers';
 
 dotEnv.config();
 
@@ -24,6 +24,4 @@ mongoose
     return server.listen({ port: 5000 });
   })
   .then((res) => console.log(`Server running at ${res.url}`))
-  .catch((error) =>
-    console.log('#$%^&*&^%RERTYUJKJNBVFDE$%^&U&^%$ERT%RGYH', error.message)
-  );
+  .catch((error) => console.log('An error occurred: ', error.message));
