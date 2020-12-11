@@ -18,12 +18,16 @@ export default gql`
     id: ID!
     body: String!
     username: String!
+    createdAt: String!
   }
   type Query {
     getPosts: [Post]
+    getPost(postId: ID!): Post
   }
   type Mutation {
     signup(signupInput: SignupInput): User!
     login(username: String!, password: String!): User!
+    createPost(body: String!): Post!
+    deletePost(postId: ID!): String!
   }
 `;

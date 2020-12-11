@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 
 import User from '../../models/user';
 import { generateToken } from '../../utils/generateToken';
+import { modifyCreatedAt } from '../../utils/responseData';
 import {
   validateLoginInput,
   validateSignupInput,
@@ -39,10 +40,8 @@ export default {
       const userData = await newUser.save();
 
       return {
-        ...userData._doc,
-        id: userData._id,
+        ...modifyCreatedAt(userData),
         token: generateToken(userData),
-        createdAt: new Date(userData.createdAt).toISOString(),
       };
     },
     login: async (_, { username, password }) => {
@@ -61,10 +60,8 @@ export default {
       }
 
       return {
-        ...user._doc,
-        id: user._id,
+        ...modifyCreatedAt(user),
         token: generateToken(user),
-        createdAt: new Date(user.createdAt).toISOString(),
       };
     },
   },
