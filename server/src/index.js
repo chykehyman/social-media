@@ -1,4 +1,4 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer, PubSub } from 'apollo-server';
 import dotEnv from 'dotenv';
 import mongoose from 'mongoose';
 
@@ -7,10 +7,12 @@ import resolvers from './graphql/resolvers';
 
 dotEnv.config();
 
+const pubsub = new PubSub();
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req }),
+  context: ({ req }) => ({ req, pubsub }),
 });
 
 mongoose
