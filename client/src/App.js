@@ -4,9 +4,9 @@ import 'semantic-ui-css/semantic.min.css';
 import { Container } from 'semantic-ui-react';
 import './App.css';
 import MenuBar from './components/MenuBar';
-import Home from './components/pages/Home';
-import Login from './components/pages/Login';
-import Register from './components/pages/Register';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 const client = new ApolloClient({
   uri: 'http://localhost:5000',
