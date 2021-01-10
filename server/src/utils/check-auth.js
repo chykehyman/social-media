@@ -10,10 +10,12 @@ export default (context) => {
         const user = jwt.verify(token, process.env.SECRET_KEY);
         return user;
       } catch (error) {
-        throw new AuthenticationError('Invalid or Expired token');
+        throw new AuthenticationError('Invalid or Expired token. Please login');
       }
     }
-    throw new Error('Authentication token must be "Bearer [token]" ');
+    throw new AuthenticationError(
+      'Authentication token must be "Bearer [token]" '
+    );
   }
-  throw new Error('Authorization header must be provided');
+  throw new AuthenticationError('Authorization header must be provided');
 };

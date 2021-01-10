@@ -1,4 +1,10 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from 'apollo-link-context';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import { Container } from 'semantic-ui-react';
@@ -10,8 +16,21 @@ import Register from './pages/Register';
 import AuthRoute from './utils/AuthRoute';
 import { AuthProvider } from './utils/context/auth';
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: 'http://localhost:5000',
+});
+
+const authLink = setContext(() => {
+  const token = localStorage.getItem('jwtToken');
+  return {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
