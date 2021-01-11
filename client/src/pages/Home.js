@@ -3,14 +3,14 @@ import { useQuery } from '@apollo/client';
 import { Grid, Transition } from 'semantic-ui-react';
 import get from 'lodash/get';
 
-import { FETCH_POSTS } from '../utils/graphql/posts';
+import { FETCH_POSTS_QUERY } from '../utils/graphql/posts';
 import { AuthContext } from '../utils/context/auth';
 import PostCard from '../components/PostCard';
 import PostForm from '../components/PostForm';
 
 const Home = () => {
   const { user } = useContext(AuthContext);
-  const { loading, data } = useQuery(FETCH_POSTS);
+  const { loading, data } = useQuery(FETCH_POSTS_QUERY);
   const posts = get(data, 'getPosts', []);
 
   return (

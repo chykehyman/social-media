@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const FETCH_POSTS = gql`
+export const FETCH_POSTS_QUERY = gql`
   {
     getPosts {
       id
@@ -57,5 +57,34 @@ export const LIKE_POST_MUTATION = gql`
       }
       likeCount
     }
+  }
+`;
+
+export const FETCH_POST_QUERY = gql`
+  query getPost($postId: ID!) {
+    getPost(postId: $postId) {
+      id
+      body
+      createdAt
+      username
+      comments {
+        id
+        body
+        username
+        createdAt
+      }
+      likes {
+        username
+        createdAt
+      }
+      commentCount
+      likeCount
+    }
+  }
+`;
+
+export const DELETE_POST_MUTATION = gql`
+  mutation deletePost($postId: ID!) {
+    deletePost(postId: $postId)
   }
 `;

@@ -13,6 +13,7 @@ import MenuBar from './components/MenuBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import PostDetails from './pages/PostDetails';
 import AuthRoute from './utils/AuthRoute';
 import { AuthProvider } from './utils/context/auth';
 
@@ -42,6 +43,15 @@ const client = new ApolloClient({
           },
         },
       },
+      Query: {
+        fields: {
+          getPosts: {
+            merge(_, incoming) {
+              return incoming;
+            },
+          },
+        },
+      },
     },
   }),
 });
@@ -54,8 +64,9 @@ function App() {
           <Container>
             <MenuBar />
             <Route exact path="/" component={Home} />
-            <AuthRoute exact path="/login" component={Login} />
-            <AuthRoute exact path="/register" component={Register} />
+            <AuthRoute path="/login" component={Login} />
+            <AuthRoute path="/register" component={Register} />
+            <Route path="/posts/:postId" component={PostDetails} />
           </Container>
         </Router>
       </AuthProvider>

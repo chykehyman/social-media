@@ -4,15 +4,12 @@ import { Button, Card, Icon, Image, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../utils/context/auth';
 import LikeButton from './LikeButton';
+import DeleteButton from './DeleteButton';
 
 const PostCard = ({
   post: { body, createdAt, id, username, likeCount, commentCount, likes },
 }) => {
   const { user } = useContext(AuthContext);
-
-  const handleDeletePost = () => {
-    console.log('Deleted');
-  };
   return (
     <Card fluid>
       <Card.Content as={Link} to={`/posts/${id}`}>
@@ -35,16 +32,7 @@ const PostCard = ({
             {commentCount}
           </Label>
         </Button>
-        {user && user.username === username && (
-          <Button
-            as="div"
-            color="red"
-            onClick={handleDeletePost}
-            floated="right"
-          >
-            <Icon name="trash" style={{ margin: 0 }} />
-          </Button>
-        )}
+        {user && user.username === username && <DeleteButton postId={id} />}
       </Card.Content>
     </Card>
   );
