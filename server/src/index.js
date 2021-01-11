@@ -6,7 +6,7 @@ import typeDefs from './graphql/types';
 import resolvers from './graphql/resolvers';
 
 dotEnv.config();
-
+const PORT = process.env.PORT || 5000;
 const pubsub = new PubSub();
 
 const server = new ApolloServer({
@@ -24,7 +24,7 @@ mongoose
   })
   .then((conn) => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
-    return server.listen({ port: 5000 });
+    return server.listen({ port: PORT });
   })
   .then((res) => console.log(`Server running at ${res.url}`))
   .catch((error) => console.log('An error occurred: ', error.message));

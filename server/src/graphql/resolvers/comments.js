@@ -9,9 +9,7 @@ export default {
     createComment: async (_, { postId, body }, context) => {
       const { username } = checkAuth(context);
       if (body.trim() === '') {
-        throw new UserInputError('Empty comment', {
-          error: { body: 'Comment body must not be empty' },
-        });
+        throw new UserInputError('Comment body must not be empty');
       }
       const post = await Post.findById(postId);
       if (!post) throw new UserInputError('Post not found');

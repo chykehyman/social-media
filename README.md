@@ -1,4 +1,4 @@
-# Socialize
+# Social-Media
 
 Social-Media is an Apollo Graphql enabled application where posts can be created, viewed, deleted, liked and commented on.
 
