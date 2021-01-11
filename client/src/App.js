@@ -41,6 +41,11 @@ const client = new ApolloClient({
               return incoming;
             },
           },
+          comments: {
+            merge(_, incoming) {
+              return incoming;
+            },
+          },
         },
       },
       Query: {

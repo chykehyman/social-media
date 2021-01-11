@@ -20,3 +20,7 @@ body {
   width: 400px;
   margin: auto;
 }
+
+.loader-margin {
+  top: 20% !important;
+}
